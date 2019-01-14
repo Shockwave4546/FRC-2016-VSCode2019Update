@@ -6,13 +6,15 @@ import edu.wpi.first.wpilibj.Servo;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -34,19 +36,18 @@ public class RobotMap {
 	public static AHRS drivetrainAHRS;
 	public static Talon drivetrainLeft;
 	public static Talon drivetrainRight;
-	public static RobotDrive drivetrainChassis;	
+	public static DifferentialDrive drivetrainChassis;	
 	
-	public static CANTalon cannonYawMotor;
-	public static CANTalon cannonPitchMotor;
-	public static CANTalon cannonFireLeft;
-	public static CANTalon cannonFireRight;
+	public static TalonSRX cannonYawMotor;
+	public static TalonSRX cannonPitchMotor;
+	public static TalonSRX cannonFireLeft;
+	public static TalonSRX cannonFireRight;
 	public static Servo cannonFeedServo;
 	public static DigitalInput cannonLimitSwitch;
 	public static AnalogInput cannonPitchEncoder;
 	public static AnalogInput cannonYawEncoder;
 	
 	public static void init()	{
-		
 		//Drivetrain Objects
         drivetrainLeft = new Talon(0);
 		LiveWindow.addActuator("Drivetrain", "Left Motor", (Talon) drivetrainLeft);
@@ -54,7 +55,7 @@ public class RobotMap {
 		drivetrainRight = new Talon(1);
 		LiveWindow.addActuator("Drivetrain", "Right Motor", (Talon) drivetrainRight);
 		
-		drivetrainChassis = new RobotDrive(drivetrainLeft, drivetrainRight);
+		drivetrainChassis = new DifferentialDrive(drivetrainLeft, drivetrainRight);
 		
 		drivetrainAHRS = new AHRS(SPI.Port.kMXP);
         LiveWindow.addActuator("Drivetrain", "Gyro", (AHRS) drivetrainAHRS);
@@ -62,28 +63,27 @@ public class RobotMap {
 		//Drivetrain config
         drivetrainChassis.setSafetyEnabled(true);
 		drivetrainChassis.setExpiration(0.1);
-        drivetrainChassis.setSensitivity(0.5);
         drivetrainChassis.setMaxOutput(1.0);
         
-        drivetrainChassis.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        drivetrainChassis.setInvertedMotor(DifferentialDrive.MotorType.kRearRight, true);
         
-        cannonYawMotor = new CANTalon(1);
-        LiveWindow.addActuator("Cannon", "Yaw Motor", (CANTalon) cannonYawMotor);
+        cannonYawMotor = new TalonSRX(1);
+        LiveWindow.addActuator("Cannon", "Yaw Motor", (TalonSRX) cannonYawMotor);
         
         cannonYawMotor.setVoltageRampRate(.75);
         cannonYawMotor.setInverted(true);
         
         //Cannon objects
-        cannonPitchMotor = new CANTalon(0);
-        LiveWindow.addActuator("Cannon", "Pitch Motor", (CANTalon) cannonPitchMotor);
+        cannonPitchMotor = new TalonSRX(0);
+        LiveWindow.addActuator("Cannon", "Pitch Motor", (TalonSRX) cannonPitchMotor);
         
         cannonPitchMotor.setVoltageRampRate(.25);
         
-        cannonFireLeft = new CANTalon(2);
-        LiveWindow.addActuator("Cannon", "Left Firing Motor", (CANTalon) cannonFireLeft);
+        cannonFireLeft = new TalonSRX(2);
+        LiveWindow.addActuator("Cannon", "Left Firing Motor", (TalonSRX) cannonFireLeft);
         
-        cannonFireRight = new CANTalon(3);
-        LiveWindow.addActuator("Cannon", "Right Firing Motor", (CANTalon) cannonFireRight);
+        cannonFireRight = new TalonSRX(3);
+        LiveWindow.addActuator("Cannon", "Right Firing Motor", (TalonSRX) cannonFireRight);
         cannonFireRight.setInverted(true);
         
         cannonFeedServo = new Servo(2);
