@@ -1,22 +1,25 @@
 package org.usfirst.frc.team4546.robot.subsystems;
 
-import org.usfirst.frc.team4546.robot.Robot;
+
 import org.usfirst.frc.team4546.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.CANTalon;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team4546.robot.commands.*;
+import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+
 
 public class Cannon extends Subsystem {
 
-	CANTalon fireRight = RobotMap.cannonFireRight;
-	CANTalon fireLeft = RobotMap.cannonFireLeft;
-	CANTalon yawMotor = RobotMap.cannonYawMotor;
-	CANTalon pitchMotor = RobotMap.cannonPitchMotor;
+	TalonSRX fireRight = RobotMap.cannonFireRight;
+	TalonSRX fireLeft = RobotMap.cannonFireLeft;
+	TalonSRX yawMotor = RobotMap.cannonYawMotor;
+	TalonSRX pitchMotor = RobotMap.cannonPitchMotor;
 	Servo feedServo = RobotMap.cannonFeedServo;
 	DigitalInput ballLimit = RobotMap.cannonLimitSwitch;
 	AnalogInput pitchEncoder = RobotMap.cannonPitchEncoder;

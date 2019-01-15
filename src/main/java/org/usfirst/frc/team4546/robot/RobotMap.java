@@ -1,20 +1,20 @@
 package org.usfirst.frc.team4546.robot;
 
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Servo;
 
-import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.Talon;
+
+
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import com.ctre.phoenix.motorcontrol.can.*;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.drive.RobotDriveBase;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+//import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import com.kauailabs.navx.frc.AHRS;
+import com.ctre.phoenix.motorcontrol.can.*;
+
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -48,55 +48,58 @@ public class RobotMap {
 	public static AnalogInput cannonYawEncoder;
 	
 	public static void init()	{
+
+
 		//Drivetrain Objects
-        drivetrainLeft = new Talon(0);
-		LiveWindow.addActuator("Drivetrain", "Left Motor", (Talon) drivetrainLeft);
+		drivetrainLeft = new Talon(0);
+		//LiveWindow.addActuator("Drivetrain", "Left Motor", (Talon) drivetrainLeft);
 		
 		drivetrainRight = new Talon(1);
-		LiveWindow.addActuator("Drivetrain", "Right Motor", (Talon) drivetrainRight);
+		//LiveWindow.addActuator("Drivetrain", "Right Motor", (Talon) drivetrainRight);
 		
 		drivetrainChassis = new DifferentialDrive(drivetrainLeft, drivetrainRight);
 		
 		drivetrainAHRS = new AHRS(SPI.Port.kMXP);
-        LiveWindow.addActuator("Drivetrain", "Gyro", (AHRS) drivetrainAHRS);
+        //LiveWindow.addActuator("Drivetrain", "Gyro", (AHRS) drivetrainAHRS);
 		
 		//Drivetrain config
         drivetrainChassis.setSafetyEnabled(true);
 		drivetrainChassis.setExpiration(0.1);
+        //drivetrainChassis.setSensitivity(0.5);
         drivetrainChassis.setMaxOutput(1.0);
         
-        drivetrainChassis.setInvertedMotor(DifferentialDrive.MotorType.kRearRight, true);
+        //drivetrainChassis.setInvertedMotor(DifferentialDrive.MotorType.kRearRight, true);
         
         cannonYawMotor = new TalonSRX(1);
-        LiveWindow.addActuator("Cannon", "Yaw Motor", (TalonSRX) cannonYawMotor);
+        //LiveWindow.addActuator("Cannon", "Yaw Motor", (TalonSRX) cannonYawMotor);
         
-        cannonYawMotor.setVoltageRampRate(.75);
+      
         cannonYawMotor.setInverted(true);
         
         //Cannon objects
         cannonPitchMotor = new TalonSRX(0);
-        LiveWindow.addActuator("Cannon", "Pitch Motor", (TalonSRX) cannonPitchMotor);
+        //LiveWindow.addActuator("Cannon", "Pitch Motor", (TalonSRX) cannonPitchMotor);
         
-        cannonPitchMotor.setVoltageRampRate(.25);
+        
         
         cannonFireLeft = new TalonSRX(2);
-        LiveWindow.addActuator("Cannon", "Left Firing Motor", (TalonSRX) cannonFireLeft);
-        
+        //LiveWindow.addActuator("Cannon", "Left Firing Motor", (TalonSRX) cannonFireLeft);
+    
         cannonFireRight = new TalonSRX(3);
-        LiveWindow.addActuator("Cannon", "Right Firing Motor", (TalonSRX) cannonFireRight);
+     
         cannonFireRight.setInverted(true);
         
         cannonFeedServo = new Servo(2);
-        LiveWindow.addActuator("Cannon", "Feed Servo", (Servo) cannonFeedServo);
+        //LiveWindow.addActuator("Cannon", "Feed Servo", (Servo) cannonFeedServo);
         
         cannonLimitSwitch = new DigitalInput(0);
-        LiveWindow.addSensor("Cannon", "Limit Switch", (DigitalInput) cannonLimitSwitch);
+       // LiveWindow.addSensor("Cannon", "Limit Switch", (DigitalInput) cannonLimitSwitch);
         
         cannonPitchEncoder = new AnalogInput(1);
-        LiveWindow.addSensor("Cannon", "Pitch Encoder", (AnalogInput) cannonPitchEncoder);
+        //LiveWindow.addSensor("Cannon", "Pitch Encoder", (AnalogInput) cannonPitchEncoder);
         
         cannonYawEncoder = new AnalogInput(0);
-        LiveWindow.addSensor("Cannon", "Yaw Encoder", (AnalogInput) cannonYawEncoder);
+        //LiveWindow.addSensor("Cannon", "Yaw Encoder", (AnalogInput) cannonYawEncoder);
         
 	}
 	

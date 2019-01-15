@@ -5,17 +5,17 @@ import org.usfirst.frc.team4546.robot.commands.Drive;
 
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.CANTalon;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Talon;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Talon;
 
 public class Drivetrain extends Subsystem {
 	
 	AHRS drivetrainAHRS = RobotMap.drivetrainAHRS;
 	Talon left = RobotMap.drivetrainLeft;
 	Talon right = RobotMap.drivetrainRight;
-	RobotDrive chassis = RobotMap.drivetrainChassis;
+	DifferentialDrive chasis = RobotMap.drivetrainChassis;
 	
 	//Drivetrain will pretty much always drive
 	protected void initDefaultCommand() {
@@ -25,7 +25,7 @@ public class Drivetrain extends Subsystem {
 	//Pass a forward speed, a rotation value, and an optional speed multiplier
 	//Set speed to 1 to disable multiplier
 	public void drive(double magnitude, double rotate, double speed)	{		
-		chassis.arcadeDrive(magnitude*speed, rotate*speed);
+		chasis.arcadeDrive(magnitude*speed, rotate*speed);
 	}
 	
 	//Get the yaw of the drivetrain itself
