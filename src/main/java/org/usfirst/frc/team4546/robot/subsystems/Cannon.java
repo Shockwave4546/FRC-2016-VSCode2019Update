@@ -7,11 +7,12 @@ import edu.wpi.first.wpilibj.AnalogInput;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import org.usfirst.frc.team4546.robot.commands.*;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.*;
-import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+
 
 
 public class Cannon extends Subsystem {
@@ -24,7 +25,7 @@ public class Cannon extends Subsystem {
 	DigitalInput ballLimit = RobotMap.cannonLimitSwitch;
 	AnalogInput pitchEncoder = RobotMap.cannonPitchEncoder;
 	AnalogInput yawEncoder = RobotMap.cannonYawEncoder;
-	
+
 	//Set speed of pitch motor
 	public void setPitchMotor(double move, double speed) {
 		
@@ -32,7 +33,8 @@ public class Cannon extends Subsystem {
 
 			pitchMotor.set(move*speed);
 		}*/
-		pitchMotor.set(move*speed);
+		
+		pitchMotor.set(ControlMode.Current, move*speed);
 	}
 	
 	//Set speed of yaw motor
@@ -42,18 +44,18 @@ public class Cannon extends Subsystem {
 
 			yawMotor.set(move*speed);
 		}*/
-		yawMotor.set(move*speed);
+		yawMotor.set(ControlMode.Current, move*speed);
 	}
 	
 	//Set speed of left firing motor
 	public void setFireLeft(double speed) {
-		fireLeft.set(speed);
+		fireLeft.set(ControlMode.Current, speed);
 	}
 	
 	//Set speed of right firing motor
 	public void setFireRight(double speed) {
 		
-		fireRight.set(speed);
+		fireRight.set(ControlMode.Current, speed);
 	}
 	
 	//Set angle of feed servo

@@ -39,8 +39,8 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
 	
-	Joystick driveStick;
-	Joystick gunnerStick;
+Joystick driveStick;
+Joystick gunnerStick;
 	
 	public OI()	{		
 		driveStick = new Joystick(0);		
@@ -87,7 +87,8 @@ public class OI {
 			   	// nbp 8/26/2017 - disable fire for MakerFaire
 			   	//trigger.whenPressed(new FireCannon());
 			   	
-			   	//threeButton.whenPressed(new UnhomeCannon());
+				   //threeButton.whenPressed(new UnhomeCannon());
+				   
 	}
 	
 		
@@ -95,7 +96,8 @@ public class OI {
 	   	//Used to access joystick values
 	public Joystick getDriveStick()	{		
 		
-	   	return driveStick;
+		   return driveStick;
+		    
 	}
 	
 	public Joystick getGunnerStick()	{
